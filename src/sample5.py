@@ -5,13 +5,16 @@ from core.signal import n
 from core.default_signals import d, dsin, u
 
 if __name__ == "__main__":
+    limits = (-1.5, 1.5)
+    divisions = 200
+
     x = d[n - 1] + d[n - 2] + d[n - 3] + d[n - 4]
     Hx = Z(x)
-    SignalPlotter.plot_complex_function(Hx, (-5, 5), (-5, 5), divisions = 50)
+    SignalPlotter.plot_complex_function(Hx, limits, limits, divisions = divisions)
 
-    SignalPlotter.plot_complex_function(Z[u], (-5, 5), (-5, 5), divisions = 50)
+    SignalPlotter.plot_complex_function(Z[u], limits, limits, divisions = divisions)
 
     x2 = dsin[pi * n / 2 - 3]
     # Z[...] is also valid
     Hx2 = Z[x2]
-    SignalPlotter.plot_complex_function(Hx2, (-5, 5), (-5, 5), divisions = 50)
+    SignalPlotter.plot_complex_function(Hx2, limits, limits, divisions = divisions)

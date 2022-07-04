@@ -60,13 +60,16 @@ class SignalPlotter:
         return np.mod(H, 1)
 
     @staticmethod
-    def classical_domain_colouring(w, s):
+    def classical_domain_colouring(w, s, max_mod: float = 100):
         # w is the  array of values f(z)
         # s is the constant saturation
         
         H = SignalPlotter.compute_hue_from_complex(w)
         S = s * np.ones(H.shape)
         modul = np.absolute(w)
+
+        modul[modul > max_mod] = 0
+
         V = (1.0-1.0/(1+modul**2))**0.2
         # the points mapped to infinity are colored with white; hsv_to_rgb(0, 0, 1)=(1, 1, 1)=white
 

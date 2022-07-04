@@ -6,12 +6,16 @@ from core.default_signals import d, dsin, u
 
 if __name__ == "__main__":
     limits = (-1.5, 1.5)
-    divisions = 200
+
+    # An increase in this number improves the resolution
+    # but also increases the plotting time
+    divisions = 200 
 
     x = d[n - 1] + d[n - 2] + d[n - 3] + d[n - 4]
     Hx = Z(x)
     SignalPlotter.plot_complex_function(Hx, limits, limits, divisions = divisions)
 
+    # Let's test it against the unit step
     SignalPlotter.plot_complex_function(Z[u], limits, limits, divisions = divisions)
 
     x2 = dsin[pi * n / 2 - 3]

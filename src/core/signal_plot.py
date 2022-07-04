@@ -1,6 +1,8 @@
 from math import ceil, floor
-from typing import Tuple
+from typing import Callable, Tuple
+from matplotlib.colors import hsv_to_rgb
 import matplotlib.pyplot as plt
+import numpy as np
 
 from core.signal import Signal
 
@@ -34,4 +36,51 @@ class SignalPlotter:
         ax.set_yticks(range(floor(y_lower_lim), ceil(y_upper_lim)))
         ax.grid(True)
 
+        plt.show()
+
+    @staticmethod
+    def compute_complex_at_grid(fn, re_lim: Tuple[float, float], im_lim: Tuple[float, float],  N: int):
+        #evaluates the complex function at the nodes of the grid
+        # N is the number of discrete points per unit interval 
+        
+        l = re_lim[1]-re_lim[0]
+        h = im_lim[1]-im_lim[0]
+        resL = N * l # horizontal resolution
+        resH = N * h # vertical resolution
+        x = np.linspace(re_lim[0], re_lim[1], int(resL))
+        y = np.linspace(im_lim[0], im_lim[1], int(resH))
+        x, y = np.meshgrid(x,y)
+        z = x + 1j*y
+        return fn(z)
+
+    @staticmethod
+    def compute_hue_from_complex(z: complex):
+        # computes the hue corresponding to the complex number z
+        H = np.angle(z) / (2*np.pi) + 1
+        return np.mod(H, 1)
+
+    @staticmethod
+    def classical_domain_colouring(w, s):
+        # w is the  array of values f(z)
+        # s is the constant saturation
+        
+        H = SignalPlotter.compute_hue_from_complex(w)
+        S = s * np.ones(H.shape)
+        modul = np.absolute(w)
+        V = (1.0-1.0/(1+modul**2))**0.2
+        # the points mapped to infinity are colored with white; hsv_to_rgb(0, 0, 1)=(1, 1, 1)=white
+
+        HSV = np.dstack((H, S, V))
+        RGB = hsv_to_rgb(HSV)
+        return RGB
+
+    @staticmethod
+    def plot_complex_function(fn: Callable[[complex], complex], re_lim: Tuple[float, float], im_lim: Tuple[float, float], divisions: int = 100):
+        w = SignalPlotter.compute_complex_at_grid(fn, re_lim, im_lim, divisions)
+        domc = SignalPlotter.classical_domain_colouring(w, 0.9)
+        plt.xlabel("$\Re(z)$")
+        plt.ylabel("$\Im(z)$")
+        plt.imshow(domc, origin="lower", extent=[re_lim[0], re_lim[1], im_lim[0], im_lim[1]])
+
+        plt.tight_layout()
         plt.show()

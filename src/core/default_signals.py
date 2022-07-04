@@ -1,3 +1,4 @@
+from cmath import sin
 from core.signal import Signal
 from typing import List
 
@@ -13,3 +14,5 @@ d = unit_impulse
 
 unit_step = Signal(lambda n: 1 if n >= 0 else 0)
 u = unit_step
+
+dsin = Signal(lambda n: sin(n))

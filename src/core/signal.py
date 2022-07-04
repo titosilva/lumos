@@ -5,8 +5,12 @@ class Signal:
         self.__fn = fn
         self.__conv_limits = convolution_limits
 
-    def __call__(self, n: int) -> complex:
-        return self.__fn(n)
+    def __call__(self, number_or_func) -> complex:
+        if callable(number_or_func):
+            fn = lambda n: self(number_or_func(n))
+            return Signal(fn)
+        else:
+            return self.__fn(number_or_func)
 
     def __add__(self, number_or_func):
         if callable(number_or_func):
@@ -24,11 +28,7 @@ class Signal:
         else:
             return Signal(lambda n: self(n) * number_or_func)
 
-    def __rmul__(self, number_or_func: Any):
-        if callable(number_or_func):
-            return Signal(lambda n: self(n) * number_or_func(n))
-        else:
-            return Signal(lambda n: self(n) * number_or_func)
+    __rmul__ = __mul__
 
     def __pow__(self, number_or_func):
         if callable(number_or_func):
@@ -37,12 +37,13 @@ class Signal:
         else:
             return Signal(lambda n: self(n) ** number_or_func)
 
-    def __getitem__(self, number_or_func):
+    def __truediv__(self, number_or_func):
         if callable(number_or_func):
-            fn = lambda n: self(number_or_func(n))
-            return Signal(fn)
+            return Signal(lambda n: self(n) / number_or_func(n))
         else:
-            return self(number_or_func)
+            return Signal(lambda n: self(n) / number_or_func)
+
+    __getitem__ = __call__
 
     def move(self, d: int):
         return Signal(lambda n: self(n - d))

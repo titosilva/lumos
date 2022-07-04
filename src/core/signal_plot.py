@@ -1,3 +1,4 @@
+from math import ceil, floor
 from typing import Tuple
 import matplotlib.pyplot as plt
 
@@ -30,7 +31,7 @@ class SignalPlotter:
         ax.set(xlim = (x_lower_lim, x_upper_lim), ylim=(y_lower_lim, y_upper_lim))
         ax.stem(x_points, y_points, basefmt=" ")
         ax.set_xticks(range(x_lower_lim, x_upper_lim))
-        ax.set_yticks(range(y_lower_lim, y_upper_lim))
+        ax.set_yticks(range(floor(y_lower_lim), ceil(y_upper_lim)))
         ax.grid(True)
 
         plt.show()

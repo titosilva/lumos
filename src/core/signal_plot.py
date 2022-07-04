@@ -1,11 +1,11 @@
 from typing import Tuple
 import matplotlib.pyplot as plt
 
-from core.signal import RealSignal
+from core.signal import Signal
 
 class SignalPlotter:
     @staticmethod
-    def plot(signal: RealSignal, limits: Tuple[int, int]):
+    def plot(signal: Signal, limits: Tuple[int, int]):
         fig, ax = plt.subplots()
 
         x_points = []
@@ -13,7 +13,12 @@ class SignalPlotter:
 
         for n in range(limits[0], limits[1] + 1):
             x_points.append(n)
-            y_points.append(signal(n))
+            y = signal(n)
+
+            if y.imag != 0:
+                raise Exception("Plotting complex signals not yet supported :(")
+
+            y_points.append(y.real)
 
         y_lower_lim = min(min(y_points) - 1, 0)
         y_upper_lim = max(max(y_points) + 1, 0)

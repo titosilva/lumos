@@ -1,4 +1,4 @@
-from cmath import sin
+from cmath import cos, sin
 from core.signal import Signal
 from typing import List
 
@@ -16,3 +16,4 @@ unit_step = Signal(lambda n: 1 if n >= 0 else 0)
 u = unit_step
 
 dsin = Signal(lambda n: sin(n))
+dcos = Signal(lambda n: cos(n))

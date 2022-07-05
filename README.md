@@ -1,4 +1,4 @@
-# :high_brightness: Welcome to Lumos project! :high_brightness:
+# Welcome to Lumos project! :high_brightness:
 Let's experiment with discrete time signals! This is a simple code in Python that aims to study and experiment with discrete time signals.
 
 # Getting started

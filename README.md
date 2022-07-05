@@ -1,5 +1,7 @@
-# :high_brightness: Welcome to Lumos project! :high_brightness:
-Let's experiment with discrete time signals! This is a simple code in Python that aims to study and experiment with discrete time signals.
+# Welcome to Lumos project! :high_brightness:
+Let's experiment with discrete time signals! This is a simple code in Python that aims to study and experiment with discrete time signals. It allows to easily define signals, using common notations. It also includes tools to plot signals and to compute the Z transform.
+
+This project is very experimental. If you want to contribute, any contribution is welcome! Create your Pull Request with any ideas you have, and let's see where it gets! 
 
 # Getting started
 You can get started by creating a virtual environment with the required packages:

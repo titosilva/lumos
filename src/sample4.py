@@ -5,6 +5,12 @@ from core.system import LTISystem
 from core.signal import n
 
 if __name__ == "__main__":
+    Td = LTISystem(d)
+    SignalPlotter.plot(Td(u), (-5, 5))
+
+    Tu = LTISystem(u)
+    SignalPlotter.plot(Tu(d), (-5, 5))
+
     T9 = LTISystem(signal_from_values([1, 2, 1, -2]))
     x9 = (u - u[n - 5]) * 3
     SignalPlotter.plot(T9(x9), (-5, 15))

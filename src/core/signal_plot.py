@@ -78,7 +78,8 @@ class SignalPlotter:
         return RGB
 
     @staticmethod
-    def plot_complex_function(fn: Callable[[complex], complex], re_lim: Tuple[float, float], im_lim: Tuple[float, float], divisions: int = 100):
+    def plot_complex_function(
+        fn: Callable[[complex], complex], re_lim: Tuple[float, float], im_lim: Tuple[float, float], divisions: int = 100):
         w = SignalPlotter.compute_complex_at_grid(fn, re_lim, im_lim, divisions)
         domc = SignalPlotter.classical_domain_colouring(w, 0.9)
         plt.xlabel("$\Re(z)$")

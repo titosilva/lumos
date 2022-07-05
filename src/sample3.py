@@ -1,4 +1,4 @@
-from core.default_signals import linear, signal_from_values, d, u
+from core.default_signals import signal_from_values, d, u
 from core.signal import n
 from core.signal_plot import SignalPlotter
 

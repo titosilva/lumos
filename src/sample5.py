@@ -13,6 +13,7 @@ if __name__ == "__main__":
     divisions = 200 
 
     x1 = d[n - 1] + d[n - 2] + d[n - 3] + d[n - 4]
+    # X1(z) = z + z ** 2 + z ** 3 + z ** 4
     Hx1 = Z(x1)
     PlotUtils.plot_complex_function(Hx1, limits, limits, divisions)
 

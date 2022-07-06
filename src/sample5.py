@@ -2,7 +2,7 @@ from cmath import pi
 from core.signal_plot import SignalPlotter
 from core.transforms import Z
 from core.signal import n
-from core.default_signals import d, dexp, dsin, u, dcos
+from core.default_signals import d, dexp, dsin, signal_from_values, u, dcos
 import numpy as np
 
 if __name__ == "__main__":
@@ -15,6 +15,10 @@ if __name__ == "__main__":
     x1 = d[n - 1] + d[n - 2] + d[n - 3] + d[n - 4]
     Hx1 = Z(x1)
     SignalPlotter.plot_complex_function(Hx1, limits, limits, divisions)
+
+    x1_v2 = signal_from_values([0, 1, 1, 1, 1])
+    Hx1_v2 = Z(x1)
+    SignalPlotter.plot_complex_function(Hx1_v2, limits, limits, divisions)
 
     # Let's test it against the unit step
     SignalPlotter.plot_complex_function(Z[u], limits, limits, divisions, lambda z: np.abs(z) > 1)

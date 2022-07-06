@@ -6,7 +6,7 @@ import numpy as np
 
 from core.signal import Signal
 
-class SignalPlotter:
+class PlotUtils:
     @staticmethod
     def plot(signal: Signal, limits: Tuple[int, int]):
         fig, ax = plt.subplots()
@@ -70,7 +70,7 @@ class SignalPlotter:
         # w is the  array of values f(z)
         # s is the constant saturation
         
-        H = SignalPlotter.compute_hue_from_complex(w)
+        H = PlotUtils.compute_hue_from_complex(w)
         S = s * np.ones(H.shape)
         modul = np.absolute(w)
 
@@ -92,8 +92,8 @@ class SignalPlotter:
         divisions: int = 100,
         area_def: Callable[[complex], bool] = None):
 
-        w = SignalPlotter.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)
-        domc = SignalPlotter.classical_domain_colouring(w, 0.9)
+        w = PlotUtils.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)
+        domc = PlotUtils.classical_domain_colouring(w, 0.9)
         plt.xlabel("$\Re(z)$")
         plt.ylabel("$\Im(z)$")
         plt.imshow(domc, origin="lower", extent=[re_lim[0], re_lim[1], im_lim[0], im_lim[1]])

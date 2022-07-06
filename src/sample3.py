@@ -1,6 +1,6 @@
 from core.default_signals import signal_from_values, d, u
 from core.signal import n
-from core.signal_plot import SignalPlotter
+from core.plot_utils import PlotUtils
 
 
 if __name__ == "__main__":
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     # SignalPlotter.plot(xb, (-5, 5))
     # SignalPlotter.plot(xc, (-5, 5))
     # SignalPlotter.plot(xd, (-2, 10))
-    SignalPlotter.plot(xe, (-5, 5))
-    SignalPlotter.plot(xf, (-5, 5))
+    PlotUtils.plot(xe, (-5, 5))
+    PlotUtils.plot(xf, (-5, 5))
 
 

@@ -140,3 +140,28 @@ class PlotUtils:
 
         plt.tight_layout()
         plt.show()
+
+    @staticmethod
+    def plot_many_complex_functions(
+        fn_plots: List[Tuple[Callable[[complex], complex], str, Tuple[float, float], Tuple[float, float], Callable[[complex], bool]]],
+        rows: int,
+        divisions: int = 100):
+        
+        subplot_idx = 0
+        _, axs = plt.subplots(rows, len(fn_plots) // rows)
+
+        for fn_plot in fn_plots:
+            ax = axs[subplot_idx]
+            fn, title, re_lim, im_lim, area_def = fn_plot
+
+            w = PlotUtils.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)
+            domc = PlotUtils.classical_domain_colouring(w, 0.9)
+            ax.set(xlabel="$\Re(z)$", ylabel="$\Im(z)$")
+            ax.set(xlim = (re_lim[0], re_lim[1]), ylim=(im_lim[0], im_lim[1]))
+            ax.imshow(domc, origin="lower", extent=[re_lim[0], re_lim[1], im_lim[0], im_lim[1]])
+            ax.set_title(title)
+
+            subplot_idx += 1
+
+        plt.tight_layout()
+        plt.show()

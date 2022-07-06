@@ -14,10 +14,10 @@ if __name__ == "__main__":
     # SignalPlotter.plot(x4, (-5, 5))
 
     wa = x2[n] - x4[n-2]
-    PlotUtils.plot(wa, (-8, 8))
+    PlotUtils.plot_signal(wa, (-8, 8))
 
     wb = -1 * x3[n - 1] * x1[n + 1]
-    PlotUtils.plot(wb, (-8, 8))
+    PlotUtils.plot_signal(wb, (-8, 8))
 
     wc = x2 * x3[n - 1] + x1
-    PlotUtils.plot(wc, (-8, 8))
+    PlotUtils.plot_signal(wc, (-8, 8))

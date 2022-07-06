@@ -1,5 +1,5 @@
 from math import ceil, floor
-from typing import Callable, Tuple
+from typing import Callable, Dict, List, Tuple
 from matplotlib.colors import hsv_to_rgb
 import matplotlib.pyplot as plt
 import numpy as np
@@ -8,7 +8,7 @@ from core.signal import Signal
 
 class PlotUtils:
     @staticmethod
-    def plot(signal: Signal, limits: Tuple[int, int]):
+    def plot_signal(signal: Signal, limits: Tuple[int, int]):
         fig, ax = plt.subplots()
 
         x_points = []
@@ -35,6 +35,45 @@ class PlotUtils:
         ax.set_xticks(range(x_lower_lim, x_upper_lim))
         ax.set_yticks(range(floor(y_lower_lim), ceil(y_upper_lim)))
         ax.grid(True)
+
+        plt.show()
+
+    @staticmethod
+    def plot_many_signals(signal_plots: List[Tuple[Signal, str, Tuple[int, int]]], rows: int):
+        subplot_idx = 0
+        _, axs = plt.subplots(rows, len(signal_plots) // rows)
+
+        for signal_plot in signal_plots:
+            signal, title, limits = signal_plot
+            ax = axs[subplot_idx]
+
+            x_points = []
+            y_points = []
+
+            for n in range(limits[0], limits[1] + 1):
+                x_points.append(n)
+                y = signal(n)
+
+                if y.imag != 0:
+                    raise Exception("Plotting complex signals not yet supported :(")
+
+                y_points.append(y.real)
+
+            y_lower_lim = min(min(y_points) - 1, 0)
+            y_upper_lim = max(max(y_points) + 1, 0)
+            x_lower_lim = limits[0] - 1
+            x_upper_lim = limits[1] + 1
+
+            ax.hlines(0, limits[0] - 1, limits[1] + 1, colors=['black'])
+            ax.vlines(0, min(y_points) - 1, max(y_points) + 1, colors=['black'])
+            ax.set(xlim = (x_lower_lim, x_upper_lim), ylim=(y_lower_lim, y_upper_lim))
+            ax.stem(x_points, y_points, basefmt=" ")
+            ax.set_xticks(range(x_lower_lim, x_upper_lim))
+            ax.set_yticks(range(floor(y_lower_lim), ceil(y_upper_lim)))
+            ax.grid(True)
+            ax.set_title(title)
+
+            subplot_idx += 1
 
         plt.show()
 

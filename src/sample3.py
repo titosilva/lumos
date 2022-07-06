@@ -15,7 +15,7 @@ if __name__ == "__main__":
     # SignalPlotter.plot(xb, (-5, 5))
     # SignalPlotter.plot(xc, (-5, 5))
     # SignalPlotter.plot(xd, (-2, 10))
-    PlotUtils.plot(xe, (-5, 5))
-    PlotUtils.plot(xf, (-5, 5))
+    PlotUtils.plot_signal(xe, (-5, 5))
+    PlotUtils.plot_signal(xf, (-5, 5))
 
 

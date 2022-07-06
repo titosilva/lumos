@@ -36,3 +36,10 @@ u = UnitStep()
 
 dsin = Signal(sin)
 dcos = Signal(cos)
+
+class DiscreteExponential(Signal):
+    def __init__(self, base: complex, *args, **kwargs):
+        super().__init__(lambda n: base ** n)
+
+def dexp(base: complex):
+    return DiscreteExponential(base)

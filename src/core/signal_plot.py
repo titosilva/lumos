@@ -39,7 +39,7 @@ class SignalPlotter:
         plt.show()
 
     @staticmethod
-    def compute_complex_at_grid(fn, re_lim: Tuple[float, float], im_lim: Tuple[float, float],  N: int):
+    def compute_complex_at_grid(fn, re_lim: Tuple[float, float], im_lim: Tuple[float, float],  N: int, area_def: Callable[[complex], bool] = None):
         #evaluates the complex function at the nodes of the grid
         # N is the number of discrete points per unit interval 
         
@@ -51,6 +51,12 @@ class SignalPlotter:
         y = np.linspace(im_lim[0], im_lim[1], int(resH))
         x, y = np.meshgrid(x,y)
         z = x + 1j*y
+
+        if area_def is not None:
+            result = fn(z)
+            area = area_def(z)
+            return result * area
+
         return fn(z)
 
     @staticmethod
@@ -60,7 +66,7 @@ class SignalPlotter:
         return np.mod(H, 1)
 
     @staticmethod
-    def classical_domain_colouring(w, s, max_mod: float = 100):
+    def classical_domain_colouring(w, s, max_mod: float = None):
         # w is the  array of values f(z)
         # s is the constant saturation
         
@@ -68,7 +74,8 @@ class SignalPlotter:
         S = s * np.ones(H.shape)
         modul = np.absolute(w)
 
-        modul[modul > max_mod] = 0
+        if max_mod is not None:
+            modul[modul > max_mod] = 0
 
         V = (1.0-1.0/(1+modul**2))**0.2
         # the points mapped to infinity are colored with white; hsv_to_rgb(0, 0, 1)=(1, 1, 1)=white
@@ -79,8 +86,13 @@ class SignalPlotter:
 
     @staticmethod
     def plot_complex_function(
-        fn: Callable[[complex], complex], re_lim: Tuple[float, float], im_lim: Tuple[float, float], divisions: int = 100):
-        w = SignalPlotter.compute_complex_at_grid(fn, re_lim, im_lim, divisions)
+        fn: Callable[[complex], complex], 
+        re_lim: Tuple[float, float], 
+        im_lim: Tuple[float, float], 
+        divisions: int = 100,
+        area_def: Callable[[complex], bool] = None):
+
+        w = SignalPlotter.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)
         domc = SignalPlotter.classical_domain_colouring(w, 0.9)
         plt.xlabel("$\Re(z)$")
         plt.ylabel("$\Im(z)$")

@@ -75,6 +75,7 @@ class PlotUtils:
 
             subplot_idx += 1
 
+        plt.subplots_adjust(hspace=0.5, wspace=0.5)
         plt.show()
 
     @staticmethod

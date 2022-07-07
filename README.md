@@ -12,3 +12,10 @@ pip install -r requirements.txt
 ```
 
 You will then be able to run the sample codes found in folder `src`.
+
+# Examples
+1. Plotting an arbitrary signal
+![Example](/resources/example_3.png)
+2. Plotting the Z transform of a function with domain colouring
+![Example](/resources/example.png)
+![Exemple](/resources/example_2.png)

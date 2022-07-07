@@ -3,6 +3,8 @@ from core.signal import n
 from core.plot_utils import PlotUtils
 
 if __name__ == "__main__":
+    # More complex combinations of signals
+
     x1 = signal_from_values([0, 1, 2, 3, 2, 1, 0])[n + 3]
     x2 = signal_from_values([1, 0.5, 1, 1])
     x3 = signal_from_values([1, 1, 1, -1, -1])[n + 2]

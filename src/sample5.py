@@ -47,12 +47,12 @@ if __name__ == "__main__":
     ], rows=1, divisions=divisions)
 
     # Let's test it against the unit step
-    PlotUtils.plot_complex_function(Z[u], limits, limits, divisions, lambda z: np.abs(z) > 1)
+    PlotUtils.plot_complex_function(Z[u], limits, limits, divisions, lambda z: np.abs(z) > 1, title='$u[n]$')
 
     x2 = dcos[pi * n / 3] * u[n]
     # Z[...] is also valid
     Hx2 = Z[x2]
-    PlotUtils.plot_complex_function(Hx2, limits, limits, divisions, lambda z: np.abs(z) > 1)
+    PlotUtils.plot_complex_function(Hx2, limits, limits, divisions, lambda z: np.abs(z) > 1, title='$cos(\\frac{\pi * n}{3}) u[n]')
 
     a = 0.6 + 0.8j
     x3 = dexp(a) * u[n]

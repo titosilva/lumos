@@ -4,6 +4,8 @@ from core.plot_utils import PlotUtils
 
 
 if __name__ == "__main__":
+    # Examples of signals built with common signals
+
     xa = signal_from_values([-2, 3, -1, 0, 2, 0, -3]).move(-2)
     xb = -3 * d[n + 3] + 2 * u[n - 1]
     xc = u[n + 2] - u[n - 2] - 2 * d[n - 4]

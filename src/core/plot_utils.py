@@ -132,14 +132,19 @@ class PlotUtils:
     def plot_complex_function(
         fn: Callable[[complex], complex], 
         re_lim: Tuple[float, float], 
-        im_lim: Tuple[float, float], 
+        im_lim: Tuple[float, float],
         divisions: int = 100,
-        area_def: Callable[[complex], bool] = None):
+        area_def: Callable[[complex], bool] = None,
+        title: str = None):
 
         w = PlotUtils.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)
         domc = PlotUtils.classical_domain_colouring(w, 0.9)
         plt.xlabel("$\Re(z)$")
         plt.ylabel("$\Im(z)$")
+        
+        if title is not None:
+            plt.title(title)
+
         plt.imshow(domc, origin="lower", extent=[re_lim[0], re_lim[1], im_lim[0], im_lim[1]])
 
         plt.tight_layout()

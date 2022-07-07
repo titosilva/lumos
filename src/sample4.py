@@ -5,6 +5,8 @@ from core.system import LTISystem
 from core.signal import n
 
 if __name__ == "__main__":
+    # Using LTISystem to compute system outputs
+
     Td = LTISystem(d)
     PlotUtils.plot_signal(Td(u), (-5, 5))
 

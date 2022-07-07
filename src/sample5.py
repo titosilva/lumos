@@ -27,7 +27,23 @@ if __name__ == "__main__":
     PlotUtils.plot_many_complex_functions([
         (Hx1, '$x[n]$', limits, limits, None),
         (Hx1_v2, '$x[n + 1]$', limits, limits, None),
-        (Hx1_v3, '$x[n + 2]$', limits, limits, None)
+        (Hx1_v3, '$x[n + 2]$', limits, limits, None),
+        
+    ], rows=1, divisions=divisions)
+
+    x1_v4 = signal_from_values([1, 2, -2, 1, -2, 2, 1])
+    Hx1_v4 = Z(x1_v4)
+
+    x1_v5 = signal_from_values([0, 1, 2, 3, 4])
+    Hx1_v5 = Z(x1_v5)
+
+    x1_v6 = signal_from_values([1, 2, 4, 8, 16])
+    Hx1_v6 = Z(x1_v6)
+
+    PlotUtils.plot_many_complex_functions([
+        (Hx1_v4, '$Arbitrário$', limits, limits, None),
+        (Hx1_v5, '$n (u[n] - u[n-5])$', (-3, 3), (-3, 3), None),
+        (Hx1_v6, '$2^n (u[n] - u[n-5])$', (-3, 3), (-3, 3), None),
     ], rows=1, divisions=divisions)
 
     # Let's test it against the unit step

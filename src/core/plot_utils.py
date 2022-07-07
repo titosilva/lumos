@@ -8,7 +8,7 @@ from core.signal import Signal
 
 class PlotUtils:
     @staticmethod
-    def plot_signal(signal: Signal, limits: Tuple[int, int]):
+    def plot_signal(signal: Signal, limits: Tuple[int, int], title: str = None):
         fig, ax = plt.subplots()
 
         x_points = []
@@ -34,6 +34,10 @@ class PlotUtils:
         ax.stem(x_points, y_points, basefmt=" ")
         ax.set_xticks(range(x_lower_lim, x_upper_lim))
         ax.set_yticks(range(floor(y_lower_lim), ceil(y_upper_lim)))
+
+        if title is not None:
+            ax.set_title(title)
+        
         ax.grid(True)
 
         plt.show()
@@ -151,7 +155,7 @@ class PlotUtils:
         _, axs = plt.subplots(rows, len(fn_plots) // rows)
 
         for fn_plot in fn_plots:
-            ax = axs[subplot_idx]
+            ax = axs[subplot_idx // rows, subplot_idx % rows] if rows > 1 else axs[subplot_idx]
             fn, title, re_lim, im_lim, area_def = fn_plot
 
             w = PlotUtils.compute_complex_at_grid(fn, re_lim, im_lim, divisions, area_def)

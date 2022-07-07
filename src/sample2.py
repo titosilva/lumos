@@ -16,10 +16,23 @@ if __name__ == "__main__":
     # SignalPlotter.plot(x4, (-5, 5))
 
     wa = x2[n] - x4[n-2]
-    PlotUtils.plot_signal(wa, (-8, 8))
+    PlotUtils.plot_many_signals([
+        (x2, '$x_2[n]$', (-8, 8)),
+        (x4, '$x_4[n]$', (-8, 8)),
+        (wa, '$x_2[n] - x_4[n-2]$', (-8, 8)),
+    ], rows=3)
 
     wb = -1 * x3[n - 1] * x1[n + 1]
-    PlotUtils.plot_signal(wb, (-8, 8))
+    PlotUtils.plot_many_signals([
+        (x3, '$x_3[n]$', (-8, 8)),
+        (x1, '$x_1[n]$', (-8, 8)),
+        (wb, '$-1 x_3[n - 1] x_1[n + 1]$', (-8, 8)),
+    ], rows=3)
 
     wc = x2 * x3[n - 1] + x1
-    PlotUtils.plot_signal(wc, (-8, 8))
+    PlotUtils.plot_many_signals([
+        (x2, '$x_2[n]$', (-8, 8)),
+        (x3, '$x_3[n]$', (-8, 8)),
+        (x1, '$x_1[n]$', (-8, 8)),
+        (wc, '$x_2[n] * x_3[n-1] + x_1[n]$', (-8, 8)),
+    ], rows=4)

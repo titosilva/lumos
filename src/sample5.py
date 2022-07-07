@@ -52,7 +52,7 @@ if __name__ == "__main__":
     x2 = dcos[pi * n / 3] * u[n]
     # Z[...] is also valid
     Hx2 = Z[x2]
-    PlotUtils.plot_complex_function(Hx2, limits, limits, divisions, lambda z: np.abs(z) > 1, title='$cos(\\frac{\pi * n}{3}) u[n]')
+    PlotUtils.plot_complex_function(Hx2, limits, limits, divisions, lambda z: np.abs(z) > 1, title='$cos(\\frac{\pi * n}{3}) u[n]$')
 
     a = 0.6 + 0.8j
     x3 = dexp(a) * u[n]
